@@ -72,13 +72,14 @@ public class EmployeeController {
                 Object.class);
     }
 
+
     @PostMapping("/search")
     public ResponseEntity<?> searchEmployees
             (@RequestParam(name = "pageNum", defaultValue = "0") int pageNum,
              @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
              @RequestBody SearchDto searchDto){
 
-        var  URI_PROVIDER = UriComponentsBuilder.fromHttpUrl(base_url)
+        var  URI_PROVIDER = UriComponentsBuilder.fromHttpUrl(base_url+"/search")
                 .queryParam("pageNum", pageNum)
                 .queryParam("pageSize", pageSize)
                 .build()
