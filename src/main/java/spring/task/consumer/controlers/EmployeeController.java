@@ -58,6 +58,23 @@ public class EmployeeController {
                 Object.class);
     }
 
+    @PutMapping()
+    public ResponseEntity<?> update(@RequestBody  EmployeeDto emp, @RequestParam Long id) {
+
+        var  URI_PROVIDER = UriComponentsBuilder.fromHttpUrl(base_url)
+                .queryParam("id", id)
+                .build()
+                .toUri();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        HttpEntity<EmployeeDto> entity = new HttpEntity<>(emp, httpHeaders);
+
+        return restTemplate.exchange(URI_PROVIDER,
+                HttpMethod.PUT, entity,
+                Object.class);
+    }
+
     @DeleteMapping("/{id}")
     @Operation(description = "Endpoint to delete a Employee from the db")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {

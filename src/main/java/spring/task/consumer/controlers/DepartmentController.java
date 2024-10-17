@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import spring.task.consumer.dtos.DepartmentDTO;
 
+import spring.task.consumer.dtos.EmployeeDto;
 import spring.task.consumer.dtos.SearchDto;
 
 import java.util.Collections;
@@ -53,6 +54,23 @@ public class DepartmentController {
 
         return restTemplate.exchange(base_url,
                 HttpMethod.POST, entity,
+                Object.class);
+    }
+
+    @PutMapping()
+    public ResponseEntity<?> update(@RequestBody DepartmentDTO dep, @RequestParam Long id) {
+
+        var  URI_PROVIDER = UriComponentsBuilder.fromHttpUrl(base_url)
+                .queryParam("id", id)
+                .build()
+                .toUri();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        HttpEntity<DepartmentDTO> entity = new HttpEntity<>(dep, httpHeaders);
+
+        return restTemplate.exchange(URI_PROVIDER,
+                HttpMethod.PUT, entity,
                 Object.class);
     }
 
