@@ -39,9 +39,8 @@ This Spring Boot web application showcases consuming external APIs using **RestT
 
 Swagger UI is available for API documentation at:
 
-```bash
 [http://localhost:8888/swagger-ui.html](http://localhost:8888/swagger-ui.html)
-```
+
 
 ## Technologies Used
 
